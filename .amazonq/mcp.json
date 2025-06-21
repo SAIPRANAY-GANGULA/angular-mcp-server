@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    },
+    "Framelink Figma MCP": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "figma-developer-mcp",
+        "--figma-api-key=YOUR-KEY",
+        "--stdio"
+      ]
+    },
+    "angular-docs": {
+      "command": "node",
+      "args": ["/Users/sai.gangula/Desktop/angular-mcp-server/build/index.js"]
+    }
+  }
+}

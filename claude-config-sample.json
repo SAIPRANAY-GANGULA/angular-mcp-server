@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "angular-docs": {
+      "command": "node",
+      "args": ["/Users/sai.gangula/Desktop/angular-mcp-server/build/index.js"]
+    }
+  }
+}
