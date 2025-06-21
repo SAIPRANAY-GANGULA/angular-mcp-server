@@ -1,18 +1,51 @@
 {
   "name": "angular-mcp-server",
   "version": "1.0.0",
-  "description": "MCP server for Angular documentation",
+  "description": "Model Context Protocol (MCP) server providing comprehensive Angular documentation access for AI assistants",
   "main": "build/index.js",
   "type": "module",
+  "bin": {
+    "angular-mcp-server": "build/index.js"
+  },
+  "files": [
+    "build/",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc && cp src/llms.txt build/ && cp src/llms-full.txt build/",
     "start": "node build/index.js",
     "dev": "npm run build && node build/index.js",
-    "test": "npx @modelcontextprotocol/inspector build/index.js"
+    "test": "npx @modelcontextprotocol/inspector build/index.js",
+    "prepublishOnly": "npm run build"
   },
-  "keywords": ["mcp", "angular", "documentation", "ai"],
-  "author": "Angular MCP Server",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "angular",
+    "documentation",
+    "ai",
+    "assistant",
+    "claude",
+    "typescript",
+    "search",
+    "developer-tools"
+  ],
+  "author": {
+    "name": "Sai Pranay Gangula"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SAIPRANAY-GANGULA/angular-mcp-server.git"
+  },
+  "homepage": "https://github.com/SAIPRANAY-GANGULA/angular-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/SAIPRANAY-GANGULA/angular-mcp-server/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "axios": "^1.6.0"

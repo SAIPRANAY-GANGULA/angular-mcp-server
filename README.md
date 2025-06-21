@@ -1,13 +1,16 @@
 # Angular MCP Server
 
-A Model Context Protocol (MCP) server that provides access to Angular documentation, allowing AI assistants to search and retrieve Angular-related information from `llms.txt` and `llms-full.txt` files.
+A Model Context Protocol (MCP) server that provides comprehensive access to Angular documentation, enabling AI assistants to search and retrieve Angular-related information with intelligent relevance scoring.
+
+[![npm version](https://badge.fury.io/js/angular-mcp-server.svg)](https://badge.fury.io/js/angular-mcp-server)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Features
 
 The server provides 5 powerful tools for Angular documentation:
 
 ### 🔍 `search_angular_docs`
-Search Angular documentation for specific topics, concepts, or keywords.
+Search Angular documentation for specific topics, concepts, or keywords with intelligent relevance scoring.
 - **Parameters:**
   - `query` (required): Search query (e.g., "components", "dependency injection", "routing")
   - `category` (optional): Filter by category (Components, Templates, Directives, etc.)
@@ -31,20 +34,9 @@ Find code examples and practical implementations for Angular concepts.
 
 ## Installation
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-2. **Build the server:**
-   ```bash
-   npm run build
-   ```
-
-3. **Test the server:**
-   ```bash
-   npm run test
-   ```
+```bash
+npm install angular-mcp-server
+```
 
 ## Usage
 
@@ -59,8 +51,8 @@ Add this configuration to your Claude Desktop MCP settings:
 {
   "mcpServers": {
     "angular-docs": {
-      "command": "node",
-      "args": ["/Users/sai.gangula/Desktop/angular-mcp-server/build/index.js"]
+      "command": "npx",
+      "args": ["angular-mcp-server"]
     }
   }
 }
@@ -75,8 +67,8 @@ Add to your Cline MCP settings:
 {
   "mcpServers": {
     "angular-docs": {
-      "command": "node",
-      "args": ["/Users/sai.gangula/Desktop/angular-mcp-server/build/index.js"],
+      "command": "npx",
+      "args": ["angular-mcp-server"],
       "disabled": false,
       "autoApprove": []
     }
@@ -89,7 +81,7 @@ Add to your Cline MCP settings:
 You can test the server manually using the MCP inspector:
 
 ```bash
-npx @modelcontextprotocol/inspector build/index.js
+npx @modelcontextprotocol/inspector npx angular-mcp-server
 ```
 
 ## Example Queries
@@ -101,22 +93,45 @@ Once integrated with your AI assistant, you can ask questions like:
 - "Find examples of dependency injection in Angular"
 - "List all Angular documentation categories"
 - "Get an overview of Angular framework"
+- "How do I implement reactive forms in Angular?"
+- "What are the best practices for Angular testing?"
 
-## Documentation Sources
+## Documentation Coverage
 
-The server reads from two files located in the `src` directory:
-- `src/llms.txt`: Structured overview of Angular documentation with links
-- `src/llms-full.txt`: Detailed Angular documentation content
+The server provides access to **84 Angular documentation topics** across **15 categories**:
 
-These files are automatically copied to the `build` directory during compilation.
+- **Components** (7 topics) - Component basics, lifecycle, styling, inputs/outputs
+- **Templates** (7 topics) - Template syntax, binding, control flow, variables
+- **Directives** (5 topics) - Built-in and custom directives, composition
+- **Signals** (3 topics) - Reactive programming with Angular signals
+- **Dependency Injection** (7 topics) - DI patterns, providers, services
+- **Forms** (6 topics) - Reactive and template-driven forms, validation
+- **Routing** (7 topics) - Navigation, route guards, lazy loading
+- **HTTP Client** (5 topics) - API communication, interceptors, testing
+- **Testing** (12 topics) - Unit testing, component testing, e2e testing
+- **Server-Side Rendering** (6 topics) - SSR, hydration, prerendering
+- **Animations** (3 topics) - Component and route animations
+- **RxJS Integration** (2 topics) - Observables with Angular
+- **APIs & CLI** (2 topics) - Reference documentation
+- **Advanced Topics** (9 topics) - Performance, security, best practices
+- **Getting Started** (3 topics) - Installation, setup, style guide
 
 ## Development
 
+### Building from Source
+
+```bash
+git clone https://github.com/SAIPRANAY-GANGULA/angular-mcp-server.git
+cd angular-mcp-server
+npm install
+npm run build
+```
+
 ### Scripts
 
-- `npm run build`: Compile TypeScript to JavaScript
+- `npm run build`: Compile TypeScript and copy documentation files
 - `npm run start`: Run the compiled server
-- `npm run dev`: Build and run in one command
+- `npm run dev`: Build and run in development mode
 - `npm run test`: Test with MCP inspector
 
 ### Project Structure
@@ -130,30 +145,50 @@ angular-mcp-server/
 ├── build/                # Compiled JavaScript (generated)
 ├── package.json
 ├── tsconfig.json
+├── LICENSE
 └── README.md
 ```
 
-## Features Loaded
+## Requirements
 
-The server successfully loads **84 Angular documentation topics** across multiple categories:
+- **Node.js**: v18.0.0 or higher
+- **npm**: v8.0.0 or higher
 
-- Components
-- Templates guides  
-- Directives
-- Signals
-- Dependency injection (DI)
-- Forms
-- HTTP client
-- Routing
-- Testing
-- And many more...
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## Troubleshooting
 
-1. **File not found errors**: Ensure `llms.txt` and `llms-full.txt` are in the `src` directory and run `npm run build`
-2. **Permission errors**: Make sure the build directory is writable
-3. **Port conflicts**: The server uses stdio, so no port conflicts should occur
+### Common Issues
+
+1. **Server not starting**: Ensure Node.js v18+ is installed
+2. **Permission errors**: Try running with `sudo` for global installation
+3. **MCP client not connecting**: Verify the configuration file syntax
+4. **No search results**: Check that the documentation files are properly loaded
+
+### Getting Help
+
+- 📖 [Documentation](https://github.com/SAIPRANAY-GANGULA/angular-mcp-server#readme)
+- 🐛 [Report Issues](https://github.com/SAIPRANAY-GANGULA/angular-mcp-server/issues)
+- 💬 [Discussions](https://github.com/SAIPRANAY-GANGULA/angular-mcp-server/discussions)
 
 ## License
 
-MIT License - Feel free to use and modify as needed.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Built with the [Model Context Protocol SDK](https://github.com/modelcontextprotocol/sdk)
+- Angular documentation sourced from [angular.dev](https://angular.dev)
+- Inspired by the growing MCP ecosystem
+
+---
+
+**Made with ❤️ for the Angular and AI community**

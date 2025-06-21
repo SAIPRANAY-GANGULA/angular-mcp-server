@@ -16,8 +16,8 @@
       ]
     },
     "angular-docs": {
-      "command": "node",
-      "args": ["/Users/sai.gangula/Desktop/angular-mcp-server/build/index.js"]
+      "command": "npx",
+      "args": ["angular-mcp-server"]
     }
   }
 }

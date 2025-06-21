@@ -83,7 +83,6 @@ class AngularMCPServer {
   private parseAngularDocs() {
     const lines = this.llmsContent.split('\n');
     let currentCategory = '';
-    let currentTopic: AngularTopic | null = null;
     
     for (const line of lines) {
       const trimmedLine = line.trim();
@@ -255,7 +254,6 @@ class AngularMCPServer {
       }
 
       let relevanceScore = 0;
-      const searchableText = `${doc.title} ${doc.content} ${doc.category}`.toLowerCase();
 
       // Calculate relevance score
       for (const term of searchTerms) {

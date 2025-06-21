@@ -39,15 +39,12 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-proxy_cookie
-credentials.json
 test-server.js
+PUBLISHING.md
 
 # System Files
 .DS_Store
 Thumbs.db
 
-# generated gql
-*.graphql-gen.ts
-
-/src/assets/i18n/idf-components
+# npm package files
+*.tgz
