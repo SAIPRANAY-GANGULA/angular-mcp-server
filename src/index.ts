@@ -37,7 +37,7 @@ class AngularMCPServer {
 
   constructor() {
     console.error('[Setup] Initializing Angular MCP server...');
-    
+
     this.server = new Server(
       {
         name: 'angular-mcp-server',
@@ -52,9 +52,9 @@ class AngularMCPServer {
 
     this.loadDocumentation();
     this.setupToolHandlers();
-    
+
     this.server.onerror = (error) => console.error('[Error]', error);
-    
+
     process.on('SIGINT', async () => {
       await this.server.close();
       process.exit(0);
@@ -66,14 +66,14 @@ class AngularMCPServer {
       // Load llms.txt (structured overview) - files are in src directory
       const llmsPath = join(__dirname, 'llms.txt');
       this.llmsContent = readFileSync(llmsPath, 'utf-8');
-      
+
       // Load llms-full.txt (detailed content)
       const llmsFullPath = join(__dirname, 'llms-full.txt');
       this.llmsFullContent = readFileSync(llmsFullPath, 'utf-8');
-      
+
       // Parse the structured documentation
       this.parseAngularDocs();
-      
+
       console.error(`[Setup] Loaded Angular documentation with ${this.angularDocs.length} topics`);
     } catch (error) {
       console.error('[Error] Failed to load documentation files:', error);
@@ -83,29 +83,29 @@ class AngularMCPServer {
   private parseAngularDocs() {
     const lines = this.llmsContent.split('\n');
     let currentCategory = '';
-    
+
     for (const line of lines) {
       const trimmedLine = line.trim();
-      
+
       // Skip empty lines and main title
       if (!trimmedLine || trimmedLine === '# Angular' || trimmedLine.startsWith('Angular — Deliver')) {
         continue;
       }
-      
+
       // Category headers (## Title)
       if (trimmedLine.startsWith('## ')) {
         currentCategory = trimmedLine.replace('## ', '');
         continue;
       }
-      
+
       // Topic items (- [Title](url))
       const topicMatch = trimmedLine.match(/^- \[([^\]]+)\]\(([^)]+)\)/);
       if (topicMatch) {
         const [, title, url] = topicMatch;
-        
+
         // Get detailed content from llms-full.txt if available
         const detailedContent = this.extractDetailedContent(title, url);
-        
+
         this.angularDocs.push({
           title,
           url,
@@ -119,14 +119,14 @@ class AngularMCPServer {
   private extractDetailedContent(title: string, url: string): string {
     // Try to find relevant content in llms-full.txt
     const sections = this.llmsFullContent.split(/\n#{1,3}\s+/);
-    
+
     for (const section of sections) {
-      if (section.toLowerCase().includes(title.toLowerCase()) || 
+      if (section.toLowerCase().includes(title.toLowerCase()) ||
           section.includes(url)) {
         return section.substring(0, 1000) + (section.length > 1000 ? '...' : '');
       }
     }
-    
+
     return '';
   }
 
@@ -210,19 +210,19 @@ class AngularMCPServer {
         switch (name) {
           case 'search_angular_docs':
             return await this.searchAngularDocs(args as { query: string; category?: string; limit?: number });
-          
+
           case 'get_angular_topic':
             return await this.getAngularTopic(args as { topic: string });
-          
+
           case 'list_angular_categories':
             return await this.listAngularCategories();
-          
+
           case 'get_angular_overview':
             return await this.getAngularOverview();
-          
+
           case 'find_angular_examples':
             return await this.findAngularExamples(args as { concept: string });
-          
+
           default:
             throw new McpError(ErrorCode.MethodNotFound, `Unknown tool: ${name}`);
         }
@@ -238,7 +238,7 @@ class AngularMCPServer {
 
   private async searchAngularDocs(args: { query: string; category?: string; limit?: number }) {
     const { query, category, limit = 5 } = args;
-    
+
     if (!query.trim()) {
       throw new McpError(ErrorCode.InvalidParams, 'Search query cannot be empty');
     }
@@ -304,14 +304,14 @@ class AngularMCPServer {
 
   private async getAngularTopic(args: { topic: string }) {
     const { topic } = args;
-    
+
     if (!topic.trim()) {
       throw new McpError(ErrorCode.InvalidParams, 'Topic name cannot be empty');
     }
 
     console.error(`[API] Getting Angular topic: "${topic}"`);
 
-    const foundTopic = this.angularDocs.find(doc => 
+    const foundTopic = this.angularDocs.find(doc =>
       doc.title.toLowerCase().includes(topic.toLowerCase()) ||
       topic.toLowerCase().includes(doc.title.toLowerCase())
     );
@@ -412,7 +412,7 @@ class AngularMCPServer {
 
   private async findAngularExamples(args: { concept: string }) {
     const { concept } = args;
-    
+
     if (!concept.trim()) {
       throw new McpError(ErrorCode.InvalidParams, 'Concept cannot be empty');
     }

@@ -1,6 +1,6 @@
 {
   "name": "angular-mcp-server",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Model Context Protocol (MCP) server providing comprehensive Angular documentation access for AI assistants",
   "main": "build/index.js",
   "type": "module",

@@ -32,12 +32,6 @@ Find code examples and practical implementations for Angular concepts.
 - **Parameters:**
   - `concept` (required): Angular concept to find examples for (e.g., "component", "service", "directive")
 
-## Installation
-
-```bash
-npm install angular-mcp-server
-```
-
 ## Usage
 
 ### With Claude Desktop
@@ -76,13 +70,35 @@ Add to your Cline MCP settings:
 }
 ```
 
-### Manual Testing
+### With Amazon Q for command line
 
-You can test the server manually using the MCP inspector:
+Amazon Q CLI supports MCP servers through configuration. Add this to your MCP configuration:
+
+```json
+{
+  "mcpServers": {
+    "angular-docs": {
+      "command": "npx",
+      "args": ["angular-mcp-server"]
+    }
+  }
+}
+```
+
+Once configured, you can interact with Angular documentation directly through Amazon Q:
 
 ```bash
-npx @modelcontextprotocol/inspector npx angular-mcp-server
+# Start Amazon Q chat with MCP support
+q chat
+
+# Example queries you can ask:
+# "Search for Angular component lifecycle methods"
+# "Show me dependency injection examples"
+# "How do I implement reactive forms?"
+# "List all Angular documentation categories"
 ```
+
+Amazon Q will automatically use the Angular MCP Server to provide comprehensive Angular documentation and code examples.
 
 ## Example Queries
 
